@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import SwiftyJSON
 
 class SignUpViewController: UIViewController,imagepickerViewControllerDelegate {
     
@@ -18,6 +19,8 @@ class SignUpViewController: UIViewController,imagepickerViewControllerDelegate {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var repeatPasswordTextField: UITextField!
+    
     
     @IBOutlet weak var cancleButton: UIButton! { didSet{
         cancleButton.addTarget(self, action: #selector(onCancelButtonTapped(button:)), for: .touchUpInside)    }}
@@ -29,20 +32,11 @@ class SignUpViewController: UIViewController,imagepickerViewControllerDelegate {
         createButton.addTarget(self, action: #selector(onCreateUserPressed(button:)), for: .touchUpInside)    }}
     
     @IBOutlet weak var profileImagePreview: UIImageView!
-    
     var fullProfilImage : UIImage?
     
+    @IBOutlet weak var referenceCodeTextField: UITextField!
+    @IBOutlet weak var messageLabel: UILabel!
     
-    @IBOutlet weak var accountTypeSelection: UISegmentedControl! {
-        didSet {
-            accountTypeSelection.selectedSegmentIndex = -1
-            accountTypeSelection.addTarget(self, action: #selector(didSelectAccountType), for: .valueChanged)
-        }
-    }
-    
-    
-    
-    @IBOutlet weak var tempLabel: UILabel!
     
     //link
     
@@ -59,93 +53,35 @@ class SignUpViewController: UIViewController,imagepickerViewControllerDelegate {
     }
     
     func onCreateUserPressed(button: UIButton) {
-        if accountTypeSelection.selectedSegmentIndex == -1 {
-            tempLabel.text = "no account type seleced"
-            return
-        }
-        
-        //TODO : more specific email and username validation, regular expression
-        guard let username = usernameTextField.text
+        //check empty
+        guard
+            let username = usernameTextField.text ,
+            let email = emailTextField.text ,
+            let password = passwordTextField.text ,
+            let repeatPassword = repeatPasswordTextField.text ,
+            let referenceCode = referenceCodeTextField.text
             else{
+                displayMessage("Cannot read data from field")
                 return
         }
-        if username == ""{
-            warningPopUp(withTitle: "Username", withMessage: "Cannot be empty")
+        
+        
+        let (isValid, message) = validateInput(code: referenceCode, name: username, email: email, password: password, repeatPassword: repeatPassword)
+        
+        if !isValid {
+            displayMessage(message)
             return
         }
         
-        let email = emailTextField.text
-        let password = passwordTextField.text
-        
-        if email == "" || password == ""{
-            warningPopUp(withTitle: "input error", withMessage: "empty email or password")
-            return
-        }
+        let accountInfo = AccountInfo(name: username, email: email, password: password, image: fullProfilImage)
         
         
-        FIRAuth.auth()?.createUser(withEmail: email!, password: password!) { (user, error) in
-            
-            //TODO: if email ald exist
-            
-            if let createAccountError = error {
-                print("Creat Account error : \(createAccountError)")
-                return
-            }
-            
-            guard let currentUser = user else{
-                print ("impossible current user not found error")
-                return
-            }
-            
-            //creat account
-            let path = "User/\(currentUser.uid)"
-            
-            var tempDict = [String : String]()
-            tempDict["name"] = username
-            tempDict["picture"] = ""
-            tempDict["desc"] = ""
-            Instagram().modifyDatabase(path: path, dictionary: tempDict)
-            
-            
-            //upload profilePic to storage (if image exist)
-            if let fullImg = self.fullProfilImage{
-                Instagram().uploadImageToStorageAndGetUrl(type: .profilePicture, image: fullImg, fileName: currentUser.uid)
-            }
-            
-            //update user info (optional)
-            let changeRequest = currentUser.profileChangeRequest()
-            changeRequest.displayName = username
-            changeRequest.photoURL = URL(string: "")
-            changeRequest.commitChanges(completion: { error in
-                if let error = error {
-                    // An error happened.
-                    print("upload user info error : \(error)")
-                } else {
-                    // Profile updated.
-                }
-            })
-            
-            
-            self.creatAccountSuccessfulPopUp(userName: self.usernameTextField.text, email: email)
-            
-            //testing
-            print("just created user")
-            Instagram().currentUserInfo()
-            print("done creating user -- log out")
-            
-            //avoid logged in directly after account successfully created
-            try! FIRAuth.auth()!.signOut()
-            Instagram().currentUserInfo()
-            
-            //TODO: Done creat user go to login page and fill the email 
-            
-        }
+        //TODO: if email ald exist
         
-        print("created process done")
-        Instagram().currentUserInfo()
+        checkCodeExist(code: referenceCode, generateAccount: true, accountInfo: accountInfo)
         
         //go back
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
     }
     
     
@@ -160,9 +96,9 @@ class SignUpViewController: UIViewController,imagepickerViewControllerDelegate {
     }
     
     func onChoosePhotoButtonPressed(button: UIButton) {
-//        let vc = imagepickerViewController()
-//        vc.delegate = self
-//        present(vc, animated: true, completion: nil)
+        //        let vc = imagepickerViewController()
+        //        vc.delegate = self
+        //        present(vc, animated: true, completion: nil)
         
         performSegue(withIdentifier: "signInToSelectPhoto", sender: self)
     }
@@ -186,24 +122,179 @@ class SignUpViewController: UIViewController,imagepickerViewControllerDelegate {
         fullProfilImage = selectedImage
         profileImagePreview.image = selectedImage
     }
-
-    @IBOutlet weak var parentTitle: UILabel!
-    @IBOutlet weak var parentIdTextField: UITextField!
-    func didSelectAccountType(_ sender: Any) {
-        let index = accountTypeSelection.selectedSegmentIndex
-        if  index == 0 || index == 2 {
-            parentTitle.isHidden = true
-            parentIdTextField.isHidden = true
-
-        }
-        else{
-            parentTitle.isHidden = false
-            parentIdTextField.isHidden = false
+    
+    func displayMessage(_ message : String){
+        messageLabel.text = message
+    }
+    
+    
+    func validateInput(code : String, name : String , email : String, password : String , repeatPassword : String) -> (Bool, String) {
+        
+        //check empty
+        if code == "" { return (false, "Code cannot be empty") }
+        if name == "" { return (false, "Name cannot be empty") }
+        if email == "" { return (false, "Email cannot be empty") }
+        if password == "" { return (false, "Password cannot be empty") }
+        if repeatPassword == "" { return (false, "Password cannot be empty") }
+        
+        //TODO : more specific email and username validation, regular expression
+        if password != repeatPassword { return (false, "Password not match") }
+        
+        return (true, "Valid Input")
+        
+    }
+    
+    
+    
+    
+    //MARK : SignUp
+    private func createAccountUsingCode(_ code : Code, accountInfo : AccountInfo){
+        
+        //create user / get uid
+        FIRAuth.auth()?.createUser(withEmail: accountInfo.email, password: accountInfo.password) { (user, error) in
+            if let createAccountError = error {
+                print("AUTH : Creat Account error : \(createAccountError)")
+                return
+            }
+            guard let currentUser = user else{
+                print("AUTH : impossible current user not found error")
+                return
+            }
+            
+            let uid = currentUser.uid
+            self.useCode(code, uid: uid, accountInfo: accountInfo)
+            
+            let message = "Account creted with \nUsername : \(accountInfo.name) \nEmail : \(accountInfo.email)"
+            let title = "Account Successful Create"
+            
+            print("AUTH : Account creted \(accountInfo.name) & \(accountInfo.email)")
+            self.warningPopUp(withTitle: title, withMessage: message)
+            
+            //self.creatAccountSuccessfulPopUp(userName: accountInfo.name, email: accountInfo.email)
+            //avoid logged in directly after account successfully created
+            try! FIRAuth.auth()!.signOut()
+            //TODO: Done create user go to login page and fill the email
+            
         }
         
-        tempLabel.text = accountTypeSelection.titleForSegment(at: accountTypeSelection.selectedSegmentIndex)
-
     }
+    
+    private func addAccountToDatabase(uid : String, type : String, accountInfo : AccountInfo){
+        
+        generateNewUserDatabase(uid: uid, type: type, accountInfo: accountInfo)
+        
+        print("AUTH : Adding profile image to databse")
+        //upload profilePic to storage (if image exist)
+        if accountInfo.image != nil {
+            print("AUTH : User have image to upload")
+            saveProfileImageToStorage(image: accountInfo.image!, uid: uid, accountType : type)
+        }else {
+            print("AUTH : User have NO image to upload")
+        }
+    }
+    
+    
+    
+    private func checkCodeExist(code : String , generateAccount use : Bool = false , accountInfo : AccountInfo? = nil) {
+        
+        print("AUTH : checking code \(code)")
+        frDBref.child("Code").child(code).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if snapshot.exists() {
+                let jsonVar = JSON(snapshot.value)
+                
+                let newCode = Code(codeId: code, value: jsonVar)
+                
+                if newCode.isUsed() {
+                    print("AUTH : Used Code")
+                    if use {
+                        print("AUTH : Cannot create account")
+                    }
+                } else {
+                    print("AUTH : Available Code")
+                    if use {
+                        guard let accountInfo = accountInfo
+                            else {
+                                print("AUTH : Using code, account info missing")
+                                return
+                        }
+                        self.createAccountUsingCode(newCode, accountInfo: accountInfo)
+                        
+                    }
+                }
+            }
+            else{
+                print("AUTH : invalide code")
+            }
+        })
+    }
+    
+    func useCode(_ code : Code, uid : String , accountInfo : AccountInfo){
+        
+        print("AUTH : Using Code")
+        addAccountToDatabase(uid: uid, type : code.type(), accountInfo: accountInfo)
+        
+        let path1 = "Code/\(code.id)"
+        PPACtion().modifyDatabase(path: path1, key: "timeUsed", value: String(Date().timeIntervalSince1970))
+        PPACtion().modifyDatabase(path: path1, key: "user", value: uid)
+    }
+    
+    func generateNewUserDatabase(uid : String, type : String, accountInfo : AccountInfo){
+        print("AUTH : Adding account Info to databse")
+        let path = "User/\(uid)"
+        PPACtion().modifyDatabase(path: path, dictionary: ["type" : type])
+        
+        let path2 = "\(type)/\(uid)"
+        var tempDict = [String : String]()
+        tempDict["name"] = accountInfo.name
+        tempDict["email"] = accountInfo.email
+        PPACtion().modifyDatabase(path: path2, dictionary: tempDict)
+    }
+    
+    
+    private func saveProfileImageToStorage(image : UIImage, uid : String, accountType : String) {
+        
+        print("AUTH : Preparing Image Data")
+        
+        guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {
+            warningPopUp(withTitle: "Image Type Error", withMessage: "Image Type Error")
+            return
+        }
+        
+        //TODO : save png file
+        let newMetadata = FIRStorageMetadata()
+        newMetadata.contentType = "image/jpeg"
+        
+        let path = "/User/\(uid).jpg"
+        
+        print("AUTH : Start upload image")
+        //upload image
+        let frStorage = FIRStorage.storage().reference()
+        frStorage.child(path).put(imageData, metadata: newMetadata, completion: {
+            (storageMeta, error) in
+            if let uploadError = error
+            {
+                self.warningPopUp(withTitle: "Upload Photo Error", withMessage: "\(uploadError)")
+                //this is to debug only
+                //assertionFailure("Failed to upload")    // dont do this on production
+                return
+            }
+            else {
+                print("AUTH : Profile image Upload Complete")
+                
+                let downloadURL = storageMeta!.downloadURL()?.absoluteString
+                let path = "\(accountType)/\(uid)"
+                PPACtion().modifyDatabase(path: path, key: "profile", value: downloadURL!)
+                
+                print("AUTH : Profile image update database")
+            }
+        })
+        
+        //TODO : access image usign path, but not url
+    }
+    
+    
+    
 }
 
 

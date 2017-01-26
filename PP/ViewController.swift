@@ -54,14 +54,36 @@ class ViewController: UIViewController {
     }
     
     var uids = [String]()
+    var testUser = ParentUser.testParentUser
     
     @IBAction func generateCodeButtonPressed(_ sender: Any) {
-        let uid = UUID().uuidString
-        uids.append(uid)
-        
-        codeTableView.reloadData()
-        
+        generateNewCode(ofType: .AD)
     }
+    
+    @IBAction func generateCode2(_ sender: Any) {
+        generateNewCode(ofType: .AA)
+    }
+    
+    func generateNewCode(ofType type : PPACtion.AccountType){
+        let uid = UUID().uuidString
+
+        PPACtion().generatedCode(owner: testUser, codeId: uid, type: type)
+        
+        //TODO : completion, add to array after database
+        uids.append(uid)
+        codeTableView.reloadData()
+    }
+    
+    
+    
+    @IBAction func tempCheckBtn(_ sender: Any) {
+        
+        let id = uids.first ?? "none"
+        //PPACtion().checkCodeExist(code: id)
+        
+        //checkCodeExist(code: id)
+    }
+    
 }
 
 

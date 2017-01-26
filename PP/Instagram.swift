@@ -95,7 +95,7 @@ class Instagram {
                 UIViewController().warningPopUp(withTitle: "Upload Photo Error", withMessage: "\(uploadError)")
 
                 //this is to debug only
-                assertionFailure("Failed to upload")    // dont do this on production
+                //assertionFailure("Failed to upload")    // dont do this on production
             }
             else {
                 let downloadURL = storageMeta!.downloadURL()?.absoluteString
