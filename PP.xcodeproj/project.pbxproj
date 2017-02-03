@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		268A67070E93093BE4F55DF4 /* Pods_PP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8289FA99FF1D92FDDA9C5B /* Pods_PP.framework */; };
 		A149FB041E38221000B31B1D /* PPAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149FB031E38221000B31B1D /* PPAction.swift */; };
+		A1974F9E1E42AD1D00F710FA /* CodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1974F9D1E42AD1D00F710FA /* CodeTableViewCell.swift */; };
+		A1974FA01E42AD8400F710FA /* CodePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1974F9F1E42AD8400F710FA /* CodePageViewController.swift */; };
 		A19EF54F1E319FAF0091556E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19EF54E1E319FAF0091556E /* User.swift */; };
 		AF61AD0B1E24C1BE001FC3FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF61AD0A1E24C1BE001FC3FB /* AppDelegate.swift */; };
 		AF61AD0D1E24C1BE001FC3FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF61AD0C1E24C1BE001FC3FB /* ViewController.swift */; };
@@ -26,6 +28,8 @@
 		4F8289FA99FF1D92FDDA9C5B /* Pods_PP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69C472857A80D5ECA69FFF98 /* Pods-PP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PP.release.xcconfig"; path = "Pods/Target Support Files/Pods-PP/Pods-PP.release.xcconfig"; sourceTree = "<group>"; };
 		A149FB031E38221000B31B1D /* PPAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PPAction.swift; sourceTree = "<group>"; };
+		A1974F9D1E42AD1D00F710FA /* CodeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTableViewCell.swift; sourceTree = "<group>"; };
+		A1974F9F1E42AD8400F710FA /* CodePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodePageViewController.swift; sourceTree = "<group>"; };
 		A19EF54E1E319FAF0091556E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AF61AD071E24C1BE001FC3FB /* PP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF61AD0A1E24C1BE001FC3FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +86,8 @@
 				AF61AD1C1E24C20C001FC3FB /* LoginViewController.swift */,
 				AF61AD1E1E24C212001FC3FB /* SignUpViewController.swift */,
 				AF61AD201E24C581001FC3FB /* imagepickerViewController.swift */,
+				A1974F9F1E42AD8400F710FA /* CodePageViewController.swift */,
+				A1974F9D1E42AD1D00F710FA /* CodeTableViewCell.swift */,
 				A19EF54E1E319FAF0091556E /* User.swift */,
 				AF61AD0E1E24C1BE001FC3FB /* Main.storyboard */,
 				AF61AD111E24C1BE001FC3FB /* Assets.xcassets */,
@@ -236,10 +242,12 @@
 				AF61AD211E24C581001FC3FB /* imagepickerViewController.swift in Sources */,
 				AF61AD1D1E24C20C001FC3FB /* LoginViewController.swift in Sources */,
 				AF61AD0D1E24C1BE001FC3FB /* ViewController.swift in Sources */,
+				A1974F9E1E42AD1D00F710FA /* CodeTableViewCell.swift in Sources */,
 				AF61AD1F1E24C212001FC3FB /* SignUpViewController.swift in Sources */,
 				AF61AD251E24C78C001FC3FB /* Instagram.swift in Sources */,
 				AF61AD0B1E24C1BE001FC3FB /* AppDelegate.swift in Sources */,
 				A19EF54F1E319FAF0091556E /* User.swift in Sources */,
+				A1974FA01E42AD8400F710FA /* CodePageViewController.swift in Sources */,
 				A149FB041E38221000B31B1D /* PPAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

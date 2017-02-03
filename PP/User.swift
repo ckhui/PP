@@ -10,22 +10,25 @@ import Foundation
 import SwiftyJSON
 
 struct Code {
-    enum Status {
+    enum Status : String {
         case Avalable
         case Used
     }
     var id : String
     var status : Status
     var accountType : String
+    var timeGenerated : TimeInterval
+    var user : String
     
     init() {
         id = "none"
         status = .Used
         accountType = "none"
+        timeGenerated = 0
+        user = "none"
     }
     
     init(codeId : String, value :JSON) {
-        
         id  = codeId
         
         if value["timeUsed"].stringValue == "-1" {
@@ -35,6 +38,9 @@ struct Code {
         }
         
         accountType = value["accountType"].stringValue
+        timeGenerated = value["timeGenerated"].doubleValue
+        
+        user = value["user"].stringValue
     }
     
     func isUsed() -> Bool {
@@ -66,7 +72,7 @@ struct Code {
         
         switch accountType {
         case "AD" , "AA":
-            return "Admin"
+            return "PPAdmin"
         case "SD" :
             return "AdminDeveloper"
         case "SA" :
@@ -82,14 +88,7 @@ struct Code {
 class ParentUser {
     
     
-    static var testParentUser : ParentUser {
-        let tempUser = ParentUser()
-        tempUser.id = "user uid"
-        tempUser.name = "testAccount"
-        tempUser.type = .AdminDeveloper
-        return tempUser
-
-    }
+    
     
     enum ParentType : String{
         case Admin
@@ -136,5 +135,33 @@ class AccountInfo {
         self.password = password
         self.image = image
     }
+    
+}
+
+class User {
+   
+    static var testParentUser : ParentUser {
+        let tempUser = ParentUser()
+        tempUser.id = "user uid"
+        tempUser.name = "testAccount"
+        tempUser.type = .AdminDeveloper
+        return tempUser
+        
+    }
+    
+//    enum accountType {
+//        case parent
+//        case child
+//        case admin
+//    }
+//    
+//    var type : accountType
+//    var child : ChildUser?
+//    var parent : ParentUser?
+//    
+//    static let loginUser = User()
+//    private init() {
+//        
+//    }
     
 }

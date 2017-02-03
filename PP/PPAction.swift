@@ -49,7 +49,8 @@ class PPACtion {
         let dict = ["owner" : owner.id,
                     "timeGenerated" : String(Date().timeIntervalSince1970),
                     "timeUsed" : "-1",
-                    "accountType" : type.rawValue]
+                    "accountType" : type.rawValue,
+                    "user" : "none"]
         
         let path1 = "Code/\(codeId)/"
         modifyDatabase(path: path1, dictionary: dict)

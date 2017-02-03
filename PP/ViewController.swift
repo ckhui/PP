@@ -54,7 +54,7 @@ class ViewController: UIViewController {
     }
     
     var uids = [String]()
-    var testUser = ParentUser.testParentUser
+    var testUser = User.testParentUser
     
     @IBAction func generateCodeButtonPressed(_ sender: Any) {
         generateNewCode(ofType: .AD)

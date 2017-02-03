@@ -236,6 +236,7 @@ class SignUpViewController: UIViewController,imagepickerViewControllerDelegate {
         
         let path1 = "Code/\(code.id)"
         PPACtion().modifyDatabase(path: path1, key: "timeUsed", value: String(Date().timeIntervalSince1970))
+        
         PPACtion().modifyDatabase(path: path1, key: "user", value: uid)
     }
     
