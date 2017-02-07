@@ -31,7 +31,7 @@ class CodeTableViewCell: UITableViewCell {
     }
     
     func displayCodeInfo() {
-        print("Code print :  \(code) " )
+        //print("Code print :  \(code) " )
         codeLabel.text = code.id
         typeLabel.text = code.accountType
         nameLabel.text = code.status.rawValue

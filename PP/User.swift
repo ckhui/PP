@@ -140,11 +140,13 @@ class AccountInfo {
 
 class User {
    
+    
     static var testParentUser : ParentUser {
         let tempUser = ParentUser()
         tempUser.id = "user uid"
         tempUser.name = "testAccount"
-        tempUser.type = .AdminDeveloper
+        tempUser.type = .Admin
+        
         return tempUser
         
     }

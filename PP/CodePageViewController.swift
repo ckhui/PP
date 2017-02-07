@@ -15,7 +15,6 @@ class CodePageViewController: UIViewController {
 
     //TEMP : testing user
     var user = User.testParentUser
-    
     var codes = [Code]()
     var frDBref: FIRDatabaseReference!
     
@@ -34,65 +33,58 @@ class CodePageViewController: UIViewController {
     }
     
     func fetchAllCodeData() {
-        frDBref.child(user.type.rawValue).child(user.id).child("generatedCode").observeSingleEvent(of: .value , with: { (snapshot) in
+        frDBref.child(user.type.rawValue).child(user.id).child("generatedCode").observe(.childAdded , with: { (snapshot) in
 
             
             if snapshot.exists() {
                 
-                guard let temp = snapshot.value as? NSDictionary,
-                      let codes = temp.allKeys as? [String]
-                    else {
-                        print ("CODE : No code generated")
-                        return
-                }
-                
-                for code in codes {
-                    //TODO : get code info
-                    //                let jsonVars = JSON(snapshot.value)
-                    //                snapshot
-                    //                for jsonVar in jsonVars {
-                    //                    codeStr.append(jsonVar.0)
-                    //                    print("ADS")
-                    //                }
-                }
+//                guard let temp = snapshot.value as? NSDictionary,
+//                      let codes = temp.allKeys as? [String]
+//                    else {
+//                        print ("CODE : No code generated")
+//                        return
+//                }
+//                
+//                for code in codes {
+//                    self.fetchCode(code)
+//                }
+                self.fetchCode(snapshot.key)
             }
             else{
                 print("CODE : firebase Path error")
             }
-            
-            //TO TEST : weather the queue is working if i have another block inside this block
-            DispatchQueue.main.async {
-                self.codeTableView.reloadData()
-            }
-            
+   
         }) { (error) in
             print(error.localizedDescription)
         }
-        
-        
-        
-//        frDBref.child("Code").observeSingleEvent(of: .value, with: { (snapshot) in
-//            print("CODE : reading code data")
-//            
-//            if snapshot.exists() {
-//                let jsonVars = JSON(snapshot.value)
-//                for jsonVar in jsonVars {
-//                    let newCode = Code(codeId: jsonVar.0, value: jsonVar.1)
-//                    self.codes.append(newCode)
-//                }
-//                
-//            }
-//            else{
-//                print("CODE : firebase Path error")
-//            }
-//            
-//            DispatchQueue.main.async {
-//                self.codeTableView.reloadData()
-//            }
-//        }) { (error) in
-//            print(error.localizedDescription)
-//        }
 
+    }
+    
+    func fetchCode(_ code : String){
+        frDBref.child("Code").child(code).observe(.value, with: { (snap) in
+                print("Queue : get code")
+                let codeJson = JSON(snap.value)
+                let newCode = Code(codeId: code, value: codeJson)
+                self.appendCode(newCode)
+        })
+        
+        
+
+    }
+    
+    func appendCode(_ code : Code){
+        
+        print("Queue : append")
+        let _index = codes.index { return $0.id == code.id}
+        if let index = _index {
+            codes[index] = code
+        }
+        else {
+            codes.append(code)
+        }
+        
+        codeTableView.reloadData()
+        
     }
 }
 

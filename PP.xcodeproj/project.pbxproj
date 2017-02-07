@@ -12,6 +12,9 @@
 		A1974F9E1E42AD1D00F710FA /* CodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1974F9D1E42AD1D00F710FA /* CodeTableViewCell.swift */; };
 		A1974FA01E42AD8400F710FA /* CodePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1974F9F1E42AD8400F710FA /* CodePageViewController.swift */; };
 		A19EF54F1E319FAF0091556E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19EF54E1E319FAF0091556E /* User.swift */; };
+		A1A6A5AD1E49474500F56FBF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A6A5AC1E49474500F56FBF /* ProfileViewController.swift */; };
+		A1A6A5AF1E49478800F56FBF /* PropertyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A6A5AE1E49478800F56FBF /* PropertyListViewController.swift */; };
+		A1A6A5B11E494E1300F56FBF /* PPMainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A6A5B01E494E1300F56FBF /* PPMainTabBarController.swift */; };
 		AF61AD0B1E24C1BE001FC3FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF61AD0A1E24C1BE001FC3FB /* AppDelegate.swift */; };
 		AF61AD0D1E24C1BE001FC3FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF61AD0C1E24C1BE001FC3FB /* ViewController.swift */; };
 		AF61AD101E24C1BE001FC3FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF61AD0E1E24C1BE001FC3FB /* Main.storyboard */; };
@@ -31,6 +34,9 @@
 		A1974F9D1E42AD1D00F710FA /* CodeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTableViewCell.swift; sourceTree = "<group>"; };
 		A1974F9F1E42AD8400F710FA /* CodePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodePageViewController.swift; sourceTree = "<group>"; };
 		A19EF54E1E319FAF0091556E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A1A6A5AC1E49474500F56FBF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A1A6A5AE1E49478800F56FBF /* PropertyListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListViewController.swift; sourceTree = "<group>"; };
+		A1A6A5B01E494E1300F56FBF /* PPMainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PPMainTabBarController.swift; sourceTree = "<group>"; };
 		AF61AD071E24C1BE001FC3FB /* PP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF61AD0A1E24C1BE001FC3FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF61AD0C1E24C1BE001FC3FB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +93,9 @@
 				AF61AD1E1E24C212001FC3FB /* SignUpViewController.swift */,
 				AF61AD201E24C581001FC3FB /* imagepickerViewController.swift */,
 				A1974F9F1E42AD8400F710FA /* CodePageViewController.swift */,
+				A1A6A5AC1E49474500F56FBF /* ProfileViewController.swift */,
+				A1A6A5B01E494E1300F56FBF /* PPMainTabBarController.swift */,
+				A1A6A5AE1E49478800F56FBF /* PropertyListViewController.swift */,
 				A1974F9D1E42AD1D00F710FA /* CodeTableViewCell.swift */,
 				A19EF54E1E319FAF0091556E /* User.swift */,
 				AF61AD0E1E24C1BE001FC3FB /* Main.storyboard */,
@@ -241,10 +250,13 @@
 			files = (
 				AF61AD211E24C581001FC3FB /* imagepickerViewController.swift in Sources */,
 				AF61AD1D1E24C20C001FC3FB /* LoginViewController.swift in Sources */,
+				A1A6A5AF1E49478800F56FBF /* PropertyListViewController.swift in Sources */,
+				A1A6A5B11E494E1300F56FBF /* PPMainTabBarController.swift in Sources */,
 				AF61AD0D1E24C1BE001FC3FB /* ViewController.swift in Sources */,
 				A1974F9E1E42AD1D00F710FA /* CodeTableViewCell.swift in Sources */,
 				AF61AD1F1E24C212001FC3FB /* SignUpViewController.swift in Sources */,
 				AF61AD251E24C78C001FC3FB /* Instagram.swift in Sources */,
+				A1A6A5AD1E49474500F56FBF /* ProfileViewController.swift in Sources */,
 				AF61AD0B1E24C1BE001FC3FB /* AppDelegate.swift in Sources */,
 				A19EF54F1E319FAF0091556E /* User.swift in Sources */,
 				A1974FA01E42AD8400F710FA /* CodePageViewController.swift in Sources */,

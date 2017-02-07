@@ -377,62 +377,6 @@ extension UIViewController{
     }
 }
 
-var imageCache = NSCache<AnyObject, AnyObject>()
-
-
-extension UIImageView {
-    
-    func loadImageUsingCacheWithUrlString(_ urlString: String) {
-        
-        self.image = nil
-        
-        //check cache for image first
-        if let cachedImage = imageCache.object(forKey: urlString as AnyObject) as? UIImage {
-            self.image = cachedImage
-            return
-        }
-        
-        //otherwise fire off a new download
-        let url = URL(string: urlString)
-        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-            
-            //download hit an error so lets return out
-            if error != nil {
-                print(error)
-                return
-            }
-            
-            DispatchQueue.main.async(execute: {
-                
-                if let downloadedImage = UIImage(data: data!) {
-                    imageCache.setObject(downloadedImage, forKey: urlString as AnyObject)
-                    
-                    self.image = downloadedImage
-                }
-            })
-        }).resume()
-    }
-}
-
-
-extension UIImageView {
-    
-    func roundShape() {
-        self.layer.cornerRadius = self.frame.height/2
-        self.clipsToBounds = true
-        self.layer.borderWidth = 1
-        self.layer.shadowOpacity = 0.7
-        self.layer.shadowOffset = CGSize(width: 3.0, height: 2.0)
-        self.layer.shadowRadius = 5
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.contentMode = .scaleAspectFill
-    }
-    
-    func centerSquare(){
-        self.clipsToBounds = true
-        self.contentMode = .scaleAspectFill
-    }
-}
 
 extension UIButton {
     func setFollow(){
