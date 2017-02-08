@@ -12,14 +12,22 @@ import FirebaseStorage
 import FirebaseStorageUI
 
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController{
 
     
     //test
-
     var storageRef : FIRStorageReference!
     
+    let user = User.testParentUser
     
+    
+    //UI
+    
+    @IBOutlet weak var uidLabel: UILabel!
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var typeLabel: UILabel!
     
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -29,12 +37,25 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         storageRef = FIRStorage.storage().reference()
         loadProfileImage()
+        
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        displayUserInfo()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func displayUserInfo(){
+        uidLabel.text = user.id
+        nameLabel.text = user.name
+        typeLabel.text = user.type.rawValue
+        
     }
     
     func loadProfileImage(){

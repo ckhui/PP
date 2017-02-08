@@ -34,15 +34,17 @@ class PPACtion {
         frDBref.child("\(path)/\(key)").setValue(value)
     }
     
-    func modifyDatabase(path: String,dictionary : [String : String] , autoId : Bool = false){
-        if autoId{
-            frDBref.child("\(path)/").childByAutoId().setValue(dictionary)
-        }
-        else{
-            frDBref.child("\(path)/").setValue(dictionary)
-        }
+    func modifyDatabase(path: String,dictionary : [String : String]){
+        frDBref.child("\(path)/").setValue(dictionary)
     }
     
+    func modifyDatabaseByAutoID(path: String, dictionary : [String : String]) -> String {
+        let ref = frDBref.child("\(path)/").childByAutoId()
+        ref.setValue(dictionary)
+        
+        return ref.key
+        
+    }
     
     
     func generatedCode(owner : ParentUser , codeId : String, type : AccountType , completion : (_ code : String) -> Void) {
@@ -63,6 +65,22 @@ class PPACtion {
         completion(codeId)
     }
     
+    
+    func preparePropertyDict(name : String) -> [String : String]{
+        return [:]
+    }
+    
+    func addProperty(owner : ParentUser , propertyName : String) {
+        let dict = ["owner" : owner.id, "timeGenerated" : String(Date().timeIntervalSince1970), "name" : propertyName]
+        
+        let path1 = "Property/"
+        let autoID = modifyDatabaseByAutoID(path: path1, dictionary: dict)
+        
+        let path2 = "\(owner.type.rawValue)/\(owner.id)/property/"
+        modifyDatabase(path: path2, key: autoID, value: "true")
+        
+        
+    }
     
 }
 
@@ -125,3 +143,16 @@ extension UIImageView {
     }
 }
 
+
+
+//TODO : USer protocol to creat general variable (user)
+
+//protocol MainTabViewControllerProtocol : class {
+//
+//}
+//
+//extension MainTabViewControllerProtocol {
+//    func getUser() -> ParentUser {
+//        return User.testParentUser
+//    }
+//}

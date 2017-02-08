@@ -7,15 +7,24 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
 
 class PPMainTabBarController: UITabBarController {
 
+    var frDBref: FIRDatabaseReference!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        frDBref = FIRDatabase.database().reference()
 
         // Do any additional setup after loading the view.
-        print("TABBAR : load")
+        print("VC LOAD : TABBAR")
         self.selectedIndex = 2
+        
+        //TODO : LOAD USER INFO HERE
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,6 +33,16 @@ class PPMainTabBarController: UITabBarController {
     }
     
 
+    func initUser(){
+        guard let uid = FIRAuth.auth()?.currentUser?.uid
+        else {
+         print("USER : NO UID FOUND")
+        }
+        
+        //frDBref.child("User").child(uid)
+        
+        
+    }
     /*
     // MARK: - Navigation
 

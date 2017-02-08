@@ -101,7 +101,7 @@ class ParentUser {
     var id : String = "AAA"
     var details : [String:Any] = [:]
     var generatedCode : [String] = []
-    var childUser : [ChildUser] = []
+    var childUser : [ChildUser]?
     var usedCode : String = "XXX"
     var type : ParentType = .None
 }
@@ -118,7 +118,7 @@ class ChildUser {
     var id : String = "AAA"
     var details : [String:Any] = [:]
     var usedCode : String = "XXX"
-    var parentUser : ParentUser?
+    var parentUserID : String?
     //var property
 }
 
@@ -140,22 +140,55 @@ class AccountInfo {
 
 class User {
    
+    var id : String = "Default User"
+    var name : String = "User Name"
+    var type : accountType = .none
+    var details : [String:Any] = [:]
+    var usedCode : String = "Code"
     
-    static var testParentUser : ParentUser {
-        let tempUser = ParentUser()
-        tempUser.id = "user uid"
-        tempUser.name = "testAccount"
-        tempUser.type = .Admin
-        
-        return tempUser
-        
+    var childUser : [ChildUser]?
+    var parentUserID : String?
+    
+    static var currentUser = User()
+    
+    init() {}
+    
+    init(_ parent : ParentUser) {
+        id = parent.id
+        name = parent.name
+        type = .parent
+        details = parent.details
+        usedCode = parent.usedCode
+
+        childUser = parent.childUser
+
+
     }
     
-//    enum accountType {
-//        case parent
-//        case child
-//        case admin
-//    }
+    init(_ child : ChildUser){
+        id = child.id
+        name = child.name
+        type = .child
+        details = child.details
+        usedCode = child.usedCode
+        
+        parentUserID = child.parentUserID
+    }
+    
+    func setCurrentUser (_ parent : ParentUser){
+        User.currentUser = User(parent)
+    }
+    
+    func setCurrentUser (_ child : ChildUser){
+        User.currentUser = User(child)
+    }
+    
+    enum accountType {
+        case parent
+        case child
+        case admin
+        case none
+    }
 //    
 //    var type : accountType
 //    var child : ChildUser?
@@ -166,4 +199,15 @@ class User {
 //        
 //    }
     
+}
+
+
+class Property {
+    var name : String
+    var id : String
+    
+    init(name : String, id : String){
+        self.name = name
+        self.id = id
+    }
 }
