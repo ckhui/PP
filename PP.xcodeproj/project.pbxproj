@@ -64,6 +64,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A172260A1E527F6300FCCAD0 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				AF61AD0A1E24C1BE001FC3FB /* AppDelegate.swift */,
+				AF61AD241E24C78C001FC3FB /* Instagram.swift */,
+				AF61AD0E1E24C1BE001FC3FB /* Main.storyboard */,
+			);
+			name = other;
+			sourceTree = "<group>";
+		};
+		A172260B1E527F6F00FCCAD0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A149FB031E38221000B31B1D /* PPAction.swift */,
+				A19EF54E1E319FAF0091556E /* User.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A172260D1E527F8500FCCAD0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A1974F9D1E42AD1D00F710FA /* CodeTableViewCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A172260E1E527F8B00FCCAD0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A1A6A5B01E494E1300F56FBF /* PPMainTabBarController.swift */,
+				A172260F1E527FCA00FCCAD0 /* VC */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		A172260F1E527FCA00FCCAD0 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				AF61AD1C1E24C20C001FC3FB /* LoginViewController.swift */,
+				AF61AD1E1E24C212001FC3FB /* SignUpViewController.swift */,
+				AF61AD201E24C581001FC3FB /* imagepickerViewController.swift */,
+				A1974F9F1E42AD8400F710FA /* CodePageViewController.swift */,
+				A1A6A5AC1E49474500F56FBF /* ProfileViewController.swift */,
+				A1A6A5AE1E49478800F56FBF /* PropertyListViewController.swift */,
+				AF61AD0C1E24C1BE001FC3FB /* ViewController.swift */,
+			);
+			name = VC;
+			sourceTree = "<group>";
+		};
+		A17226101E52800000FCCAD0 /* SupportingFile */ = {
+			isa = PBXGroup;
+			children = (
+				AF61AD111E24C1BE001FC3FB /* Assets.xcassets */,
+				AF61AD131E24C1BE001FC3FB /* LaunchScreen.storyboard */,
+				AF61AD221E24C66E001FC3FB /* GoogleService-Info.plist */,
+				AF61AD161E24C1BE001FC3FB /* Info.plist */,
+			);
+			name = SupportingFile;
+			sourceTree = "<group>";
+		};
 		AF61ACFE1E24C1BE001FC3FB = {
 			isa = PBXGroup;
 			children = (
@@ -85,24 +146,11 @@
 		AF61AD091E24C1BE001FC3FB /* PP */ = {
 			isa = PBXGroup;
 			children = (
-				AF61AD241E24C78C001FC3FB /* Instagram.swift */,
-				A149FB031E38221000B31B1D /* PPAction.swift */,
-				AF61AD0A1E24C1BE001FC3FB /* AppDelegate.swift */,
-				AF61AD0C1E24C1BE001FC3FB /* ViewController.swift */,
-				AF61AD1C1E24C20C001FC3FB /* LoginViewController.swift */,
-				AF61AD1E1E24C212001FC3FB /* SignUpViewController.swift */,
-				AF61AD201E24C581001FC3FB /* imagepickerViewController.swift */,
-				A1974F9F1E42AD8400F710FA /* CodePageViewController.swift */,
-				A1A6A5AC1E49474500F56FBF /* ProfileViewController.swift */,
-				A1A6A5B01E494E1300F56FBF /* PPMainTabBarController.swift */,
-				A1A6A5AE1E49478800F56FBF /* PropertyListViewController.swift */,
-				A1974F9D1E42AD1D00F710FA /* CodeTableViewCell.swift */,
-				A19EF54E1E319FAF0091556E /* User.swift */,
-				AF61AD0E1E24C1BE001FC3FB /* Main.storyboard */,
-				AF61AD111E24C1BE001FC3FB /* Assets.xcassets */,
-				AF61AD131E24C1BE001FC3FB /* LaunchScreen.storyboard */,
-				AF61AD221E24C66E001FC3FB /* GoogleService-Info.plist */,
-				AF61AD161E24C1BE001FC3FB /* Info.plist */,
+				A172260A1E527F6300FCCAD0 /* other */,
+				A172260B1E527F6F00FCCAD0 /* Model */,
+				A172260D1E527F8500FCCAD0 /* View */,
+				A172260E1E527F8B00FCCAD0 /* Controller */,
+				A17226101E52800000FCCAD0 /* SupportingFile */,
 			);
 			path = PP;
 			sourceTree = "<group>";

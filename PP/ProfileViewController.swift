@@ -18,7 +18,7 @@ class ProfileViewController: UIViewController{
     //test
     var storageRef : FIRStorageReference!
     
-    let user = User.testParentUser
+    let user = User.currentUser
     
     
     //UI

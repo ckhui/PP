@@ -14,7 +14,7 @@ import SwiftyJSON
 class CodePageViewController: UIViewController {
 
     //TEMP : testing user
-    var user = User.testParentUser
+    var user = User.currentUser
     var codes = [Code]()
     var frDBref: FIRDatabaseReference!
     

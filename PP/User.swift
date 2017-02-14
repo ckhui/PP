@@ -84,18 +84,17 @@ struct Code {
     
 }
 
+enum AccountType : String {
+    case AdminDeveloper
+    case AdminAgent
+    case StdDeveloper
+    case StdAgent
+    case Admin
+    case None
+}
+
 
 class ParentUser {
-    
-    
-    
-    
-    enum ParentType : String{
-        case Admin
-        case AdminDeveloper
-        case AdminAgent
-        case None
-    }
     
     var name : String = "ParentName"
     var id : String = "AAA"
@@ -103,22 +102,19 @@ class ParentUser {
     var generatedCode : [String] = []
     var childUser : [ChildUser]?
     var usedCode : String = "XXX"
-    var type : ParentType = .None
+    var type : AccountType = .None
 }
 
 
 class ChildUser {
-    
-    enum ChildType : String {
-        case StdDeveloper
-        case StdAgent
-    }
     
     var name : String = "ChildName"
     var id : String = "AAA"
     var details : [String:Any] = [:]
     var usedCode : String = "XXX"
     var parentUserID : String?
+    var type : AccountType = .None
+    
     //var property
 }
 
@@ -142,7 +138,7 @@ class User {
    
     var id : String = "Default User"
     var name : String = "User Name"
-    var type : accountType = .none
+    var type : AccountType = .None
     var details : [String:Any] = [:]
     var usedCode : String = "Code"
     
@@ -156,7 +152,7 @@ class User {
     init(_ parent : ParentUser) {
         id = parent.id
         name = parent.name
-        type = .parent
+        type = parent.type
         details = parent.details
         usedCode = parent.usedCode
 
@@ -168,7 +164,7 @@ class User {
     init(_ child : ChildUser){
         id = child.id
         name = child.name
-        type = .child
+        type = child.type
         details = child.details
         usedCode = child.usedCode
         
@@ -183,12 +179,7 @@ class User {
         User.currentUser = User(child)
     }
     
-    enum accountType {
-        case parent
-        case child
-        case admin
-        case none
-    }
+    
 //    
 //    var type : accountType
 //    var child : ChildUser?

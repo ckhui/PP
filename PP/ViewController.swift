@@ -12,7 +12,7 @@ import FirebaseAuth
 class ViewController: UIViewController {
     
     var uids = [String]()
-    var testUser = User.testParentUser
+    var testUser = User.currentUser
     
     
     @IBOutlet weak var codeTableView: UITableView! {
@@ -66,19 +66,17 @@ class ViewController: UIViewController {
         generateCode1.isEnabled = false
         generateCode2.isEnabled = false
         let user = testUser
-        if let user = user as? ParentUser {
-            switch (user.type) {
-            case .Admin :
-                setGenerateCodeButtonFunction(button: generateCode1, codeType: .AA)
-                setGenerateCodeButtonFunction(button: generateCode2, codeType: .AD)
-            case .AdminAgent :
-                setGenerateCodeButtonFunction(button: generateCode1, codeType: .SA)
-            case .AdminDeveloper :
-                setGenerateCodeButtonFunction(button: generateCode1, codeType: .SD)
-            default :
-                generateCode1.isEnabled = false
-                generateCode2.isEnabled = false
-            }
+        switch (user.type) {
+        case .Admin :
+            setGenerateCodeButtonFunction(button: generateCode1, codeType: .AA)
+            setGenerateCodeButtonFunction(button: generateCode2, codeType: .AD)
+        case .AdminAgent :
+            setGenerateCodeButtonFunction(button: generateCode1, codeType: .SA)
+        case .AdminDeveloper :
+            setGenerateCodeButtonFunction(button: generateCode1, codeType: .SD)
+        default :
+            generateCode1.isEnabled = false
+            generateCode2.isEnabled = false
         }
     }
     
@@ -94,11 +92,11 @@ class ViewController: UIViewController {
     
     func generateCodeButtonPressed(_ sender : UIButton) {
         guard let type = sender.accessibilityIdentifier
-        else {
-            print("CODE : Button have no type assign")
-            return
+            else {
+                print("CODE : Button have no type assign")
+                return
         }
-    
+        
         switch type {
         case "AD" :
             generateNewCode(ofType: .AD)
@@ -112,7 +110,7 @@ class ViewController: UIViewController {
             print("CODE : Account Type Error")
         }
     }
-
+    
     
     func generateNewCode(ofType type : PPACtion.AccountType){
         let uid = UUID().uuidString
@@ -122,7 +120,7 @@ class ViewController: UIViewController {
             uids.append(uid)
             codeTableView.reloadData()
         }
-
+        
     }
     
 }

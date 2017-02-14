@@ -47,7 +47,7 @@ class PPACtion {
     }
     
     
-    func generatedCode(owner : ParentUser , codeId : String, type : AccountType , completion : (_ code : String) -> Void) {
+    func generatedCode(owner : User , codeId : String, type : AccountType , completion : (_ code : String) -> Void) {
         
         let dict = ["owner" : owner.id,
                     "timeGenerated" : String(Date().timeIntervalSince1970),
@@ -70,7 +70,7 @@ class PPACtion {
         return [:]
     }
     
-    func addProperty(owner : ParentUser , propertyName : String) {
+    func addProperty(owner : User , propertyName : String) {
         let dict = ["owner" : owner.id, "timeGenerated" : String(Date().timeIntervalSince1970), "name" : propertyName]
         
         let path1 = "Property/"

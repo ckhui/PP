@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class PropertyListViewController: UIViewController {
 
-    let user = User.testParentUser
+    let user = User.currentUser
     var frDBref: FIRDatabaseReference!
     
     //TODO : Change to table / collection
@@ -51,6 +51,13 @@ class PropertyListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("VC load : Property")
+        print("user =")
+        dump(user)
+        
+        print("saved User")
+        dump(User.currentUser)
         
         frDBref = FIRDatabase.database().reference()
         
