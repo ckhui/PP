@@ -122,13 +122,13 @@
 			isa = PBXGroup;
 			children = (
 				A17226611E5538AE00FCCAD0 /* Auth */,
-				A1A6A5AC1E49474500F56FBF /* ProfileViewController.swift */,
+				A17226621E5538F500FCCAD0 /* Property */,
 				A1974F9F1E42AD8400F710FA /* CodePageViewController.swift */,
-				AF61AD0C1E24C1BE001FC3FB /* ViewController.swift */,
-				A17226131E5286F100FCCAD0 /* PartnerViewController.swift */,
 				A17226151E52871800FCCAD0 /* HistoryViewController.swift */,
 				A17226171E52872D00FCCAD0 /* NotificationViewController.swift */,
-				A17226621E5538F500FCCAD0 /* Property */,
+				A17226131E5286F100FCCAD0 /* PartnerViewController.swift */,
+				A1A6A5AC1E49474500F56FBF /* ProfileViewController.swift */,
+				AF61AD0C1E24C1BE001FC3FB /* ViewController.swift */,
 				AF61AD201E24C581001FC3FB /* imagepickerViewController.swift */,
 			);
 			path = VC;
@@ -152,20 +152,22 @@
 				AF61AD1E1E24C212001FC3FB /* SignUpViewController.swift */,
 			);
 			name = Auth;
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		A17226621E5538F500FCCAD0 /* Property */ = {
 			isa = PBXGroup;
 			children = (
-				A17226111E52867300FCCAD0 /* PropertiesViewController.swift */,
 				A1A6A5AE1E49478800F56FBF /* AddPropertyViewController.swift */,
+				A17226111E52867300FCCAD0 /* PropertiesViewController.swift */,
+				A172261D1E528F4B00FCCAD0 /* PropertyBuildingViewController.swift */,
 				A17226211E528F8800FCCAD0 /* PropertyDetailsMainViewController.swift */,
 				A17226191E5287B000FCCAD0 /* PropertyDetailsViewController.swift */,
-				A172261B1E528F2B00FCCAD0 /* PropertyTypeViewController.swift */,
-				A172261D1E528F4B00FCCAD0 /* PropertyBuildingViewController.swift */,
 				A172261F1E528F5D00FCCAD0 /* PropertyStatViewController.swift */,
+				A172261B1E528F2B00FCCAD0 /* PropertyTypeViewController.swift */,
 			);
 			name = Property;
+			path = Property;
 			sourceTree = "<group>";
 		};
 		AF61ACFE1E24C1BE001FC3FB = {
