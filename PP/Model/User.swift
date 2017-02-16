@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-struct Code {
+class Code {
     enum Status : String {
         case Avalable
         case Used
@@ -18,14 +18,18 @@ struct Code {
     var status : Status
     var accountType : String
     var timeGenerated : TimeInterval
+    var timeUsed : TimeInterval
     var user : String
+    var owner : String
     
     init() {
         id = "none"
         status = .Used
         accountType = "none"
         timeGenerated = 0
+        timeUsed = 0
         user = "none"
+        owner = "none"
     }
     
     init(codeId : String, value :JSON) {
@@ -37,10 +41,14 @@ struct Code {
             status = .Used
         }
         
+        timeUsed = value["timeUsed"].doubleValue
+        
         accountType = value["accountType"].stringValue
         timeGenerated = value["timeGenerated"].doubleValue
         
         user = value["user"].stringValue
+        
+        owner = value["owner"].stringValue
     }
     
     func isUsed() -> Bool {
@@ -82,6 +90,10 @@ struct Code {
         }
     }
     
+    func used(by uid : String , at time : TimeInterval){
+        user = uid
+        timeUsed = time
+    }
 }
 
 enum AccountType : String {
@@ -93,29 +105,87 @@ enum AccountType : String {
     case None
 }
 
+class PPHelper {
+    static func getUserTypeFrom(string : String) -> AccountType{
+        switch string {
+        case "AdminDeveloper" :
+            return .AdminDeveloper
+        case "AdminAgent" :
+            return .AdminAgent
+        case "StdDeveloper" :
+            return .StdDeveloper
+        case "StdAgent" :
+            return .StdAgent
+        default :
+            return .None
+        }
+    }
+}
 
 class ParentUser {
     
-    var name : String = "ParentName"
     var id : String = "AAA"
-    var details : [String:Any] = [:]
-    var generatedCode : [String] = []
-    var childUser : [ChildUser]?
+    var name : String = "ParentName"
+    var email : String = "Email"
+    var imageUrl : String?
+    var generatedTime : String = ""
     var usedCode : String = "XXX"
     var type : AccountType = .None
+    
+    var generatedCode : [String] = []
+    var childUser : [ChildUser]?
+    
+    
+    init(id : String, accountType : String, json : JSON){
+        
+        self.id = id
+        
+        name = json["name"].stringValue
+        email = json["email"].stringValue
+        imageUrl = json["profile"].string
+        
+        generatedTime = json["timeCreated"].stringValue
+        usedCode = json["usedCode"].stringValue
+
+        type = PPHelper.getUserTypeFrom(string: accountType)
+
+        //generatedCode
+        //childUser
+
+    }
 }
 
 
 class ChildUser {
     
-    var name : String = "ChildName"
     var id : String = "AAA"
-    var details : [String:Any] = [:]
+    var name : String = "ChildName"
+    var email : String = "Email"
+    var imageUrl : String?
+    var generatedTime : String = ""
     var usedCode : String = "XXX"
-    var parentUserID : String?
     var type : AccountType = .None
     
+    var parentUserID : String?
+    
     //var property
+    
+    init(id : String, accountType : String, json : JSON){
+        
+        self.id = id
+        
+        name = json["name"].stringValue
+        email = json["email"].stringValue
+        imageUrl = json["profile"].string
+        
+        generatedTime = json["timeCreated"].stringValue
+        usedCode = json["usedCode"].stringValue
+        
+        type = PPHelper.getUserTypeFrom(string: accountType)
+        
+        parentUserID = json["parent"].stringValue
+        
+    }
 }
 
 
@@ -136,10 +206,14 @@ class AccountInfo {
 
 class User {
    
+    var isParent = false
+    
     var id : String = "Default User"
     var name : String = "User Name"
+    var email : String = "Email"
     var type : AccountType = .None
-    var details : [String:Any] = [:]
+    var imageUrl : String?
+    var generatedTime : String = ""
     var usedCode : String = "Code"
     
     var childUser : [ChildUser]?
@@ -150,10 +224,14 @@ class User {
     init() {}
     
     init(_ parent : ParentUser) {
+        isParent = true
+        
         id = parent.id
         name = parent.name
+        email = parent.email
         type = parent.type
-        details = parent.details
+        imageUrl = parent.imageUrl
+        generatedTime = parent.generatedTime
         usedCode = parent.usedCode
 
         childUser = parent.childUser
@@ -162,14 +240,42 @@ class User {
     }
     
     init(_ child : ChildUser){
+        isParent = false
+        
         id = child.id
         name = child.name
+        email = child.email
         type = child.type
-        details = child.details
+        imageUrl = child.imageUrl
+        generatedTime = child.generatedTime
         usedCode = child.usedCode
         
         parentUserID = child.parentUserID
     }
+    
+    /*
+    init(id : String, type : String json : JSON) {
+        
+        self.id = id
+        
+        self.type = type
+        
+        
+        name = json["name"].stringValue
+        email = json["email"].stringValue
+        
+        details = child.details
+        usedCode = child.usedCode
+ 
+        childUser = parent.childUser
+ 
+        parentUserID = child.parentUserID
+        
+        print(json)
+        
+        print("done")
+    }
+     */
     
     func setCurrentUser (_ parent : ParentUser){
         User.currentUser = User(parent)

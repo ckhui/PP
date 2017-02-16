@@ -12,7 +12,7 @@ import FirebaseAuth
 class ViewController: UIViewController {
     
     var uids = [String]()
-    var testUser = User.currentUser
+    var user : User!
     
     
     @IBOutlet weak var codeTableView: UITableView! {
@@ -23,6 +23,8 @@ class ViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        user = User.currentUser
         // Do any additional setup after loading the view, typically from a nib.
         initGenerateCodeButton()
     }
@@ -33,31 +35,7 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func logoutTapped(_ sender: AnyObject) {
-        let popUP = UIAlertController(title: "log out", message: "yer or no", preferredStyle: .alert)
-        let noButton = UIAlertAction(title: "NO", style: .cancel, handler: nil)
-        let yesButton = UIAlertAction(title: "YES", style: .default) { (action) in
-            do
-            {
-                try FIRAuth.auth()?.signOut()
-            }
-            catch let logoutError {
-                print(logoutError)
-            }
-            self.notifySuccessLogout()
-        }
         
-        popUP.addAction(noButton)
-        popUP.addAction(yesButton)
-        present(popUP, animated: true, completion: nil)
-    }
-    
-    func notifySuccessLogout ()
-    {
-        let UserLogoutNotification = Notification (name: Notification.Name(rawValue: "UserLogoutNotification"), object: nil, userInfo: nil)
-        NotificationCenter.default.post(UserLogoutNotification)
-    }
-    
     @IBOutlet weak var generateCode1: UIButton!
     @IBOutlet weak var generateCode2: UIButton!
     
@@ -65,7 +43,7 @@ class ViewController: UIViewController {
     func initGenerateCodeButton(){
         generateCode1.isEnabled = false
         generateCode2.isEnabled = false
-        let user = testUser
+
         switch (user.type) {
         case .Admin :
             setGenerateCodeButtonFunction(button: generateCode1, codeType: .AA)
@@ -115,12 +93,7 @@ class ViewController: UIViewController {
     func generateNewCode(ofType type : PPACtion.AccountType){
         let uid = UUID().uuidString
         
-        PPACtion().generatedCode(owner: testUser, codeId: uid, type: type){
-            (code) in
-            uids.append(uid)
-            codeTableView.reloadData()
-        }
-        
+        PPACtion().generatedCode(owner: user, codeId: uid, type: type)
     }
     
 }

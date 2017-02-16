@@ -179,15 +179,15 @@ class SignUpViewController: UIViewController,imagepickerViewControllerDelegate {
         
     }
     
-    private func addAccountToDatabase(uid : String, type : String, accountInfo : AccountInfo){
+    private func addAccountToDatabase(uid : String, code : Code, accountInfo : AccountInfo){
         
-        generateNewUserDatabase(uid: uid, type: type, accountInfo: accountInfo)
+        generateNewUserDatabase(uid: uid, withCode : code, accountInfo: accountInfo)
         
         print("AUTH : Adding profile image to databse")
         //upload profilePic to storage (if image exist)
         if accountInfo.image != nil {
             print("AUTH : User have image to upload")
-            saveProfileImageToStorage(image: accountInfo.image!, uid: uid, accountType : type)
+            saveProfileImageToStorage(image: accountInfo.image!, uid: uid, accountType : code.type())
         }else {
             print("AUTH : User have NO image to upload")
         }
@@ -203,7 +203,7 @@ class SignUpViewController: UIViewController,imagepickerViewControllerDelegate {
             if snapshot.exists() {
                 let jsonVar = JSON(snapshot.value)
                 
-                let newCode = Code(codeId: code, value: jsonVar)
+                var newCode = Code(codeId: code, value: jsonVar)
                 
                 if newCode.isUsed() {
                     print("AUTH : Used Code")
@@ -232,15 +232,25 @@ class SignUpViewController: UIViewController,imagepickerViewControllerDelegate {
     func useCode(_ code : Code, uid : String , accountInfo : AccountInfo){
         
         print("AUTH : Using Code")
-        addAccountToDatabase(uid: uid, type : code.type(), accountInfo: accountInfo)
-        
         let path1 = "Code/\(code.id)"
-        PPACtion().modifyDatabase(path: path1, key: "timeUsed", value: String(Date().timeIntervalSince1970))
-        
+        let usedTime = Date().timeIntervalSince1970
+        PPACtion().modifyDatabase(path: path1, key: "timeUsed", value: String(usedTime))
         PPACtion().modifyDatabase(path: path1, key: "user", value: uid)
+        
+        code.used(by: uid, at: usedTime)
+        
+        addChildUser(code : code)
+        addAccountToDatabase(uid: uid, code : code, accountInfo: accountInfo)
     }
     
-    func generateNewUserDatabase(uid : String, type : String, accountInfo : AccountInfo){
+    func addChildUser(code : Code){
+        print("AUTH : Creating child in parent")
+        let path = "\(code.parentType())/\(code.owner)/child"
+        PPACtion().modifyDatabase(path: path, dictionary: [code.user : "true"])
+    }
+    
+    func generateNewUserDatabase(uid : String, withCode code : Code, accountInfo : AccountInfo){
+        let type = code.type()
         print("AUTH : Adding account Info to databse")
         let path = "User/\(uid)"
         PPACtion().modifyDatabase(path: path, dictionary: ["type" : type])
@@ -249,6 +259,9 @@ class SignUpViewController: UIViewController,imagepickerViewControllerDelegate {
         var tempDict = [String : String]()
         tempDict["name"] = accountInfo.name
         tempDict["email"] = accountInfo.email
+        tempDict["usedCode"] = code.id
+        tempDict["parent"] = code.owner
+        tempDict["timeCreated"] = code.owner
         PPACtion().modifyDatabase(path: path2, dictionary: tempDict)
     }
     

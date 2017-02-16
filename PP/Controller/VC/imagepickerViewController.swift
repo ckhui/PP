@@ -31,7 +31,7 @@ class imagepickerViewController: UIViewController, UINavigationControllerDelegat
 
         }
         else{
-            imageView.image = #imageLiteral(resourceName: "pichu")
+            imageView.image = #imageLiteral(resourceName: "fan")
         }
         imageView.layer.borderWidth = 3.0
         imageView.layer.borderColor = UIColor.blue.cgColor

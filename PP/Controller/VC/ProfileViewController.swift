@@ -8,6 +8,7 @@
 
 import UIKit
 
+import FirebaseAuth
 import FirebaseStorage
 import FirebaseStorageUI
 
@@ -18,7 +19,7 @@ class ProfileViewController: UIViewController{
     //test
     var storageRef : FIRStorageReference!
     
-    let user = User.currentUser
+    var user : User!
     
     
     //UI
@@ -35,6 +36,8 @@ class ProfileViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("VC load : Profile")
+        user = User.currentUser
         storageRef = FIRStorage.storage().reference()
         loadProfileImage()
         
@@ -64,6 +67,32 @@ class ProfileViewController: UIViewController{
         profileImageView.sd_setImage(with: imagesRef, placeholderImage: placeholderImage)
         
     }
+    
+    @IBAction func logoutTapped(_ sender: AnyObject) {
+        let popUP = UIAlertController(title: "log out", message: "yer or no", preferredStyle: .alert)
+        let noButton = UIAlertAction(title: "NO", style: .cancel, handler: nil)
+        let yesButton = UIAlertAction(title: "YES", style: .default) { (action) in
+            do
+            {
+                try FIRAuth.auth()?.signOut()
+            }
+            catch let logoutError {
+                print(logoutError)
+            }
+            self.notifySuccessLogout()
+        }
+        
+        popUP.addAction(noButton)
+        popUP.addAction(yesButton)
+        present(popUP, animated: true, completion: nil)
+    }
+    
+    func notifySuccessLogout ()
+    {
+        let UserLogoutNotification = Notification (name: Notification.Name(rawValue: "UserLogoutNotification"), object: nil, userInfo: nil)
+        NotificationCenter.default.post(UserLogoutNotification)
+    }
+
 
     /*
     // MARK: - Navigation

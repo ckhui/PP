@@ -10,9 +10,9 @@ import UIKit
 import FirebaseDatabase
 import SwiftyJSON
 
-class PropertyListViewController: UIViewController {
+class AddPropertyViewController: UIViewController {
 
-    let user = User.currentUser
+    var user : User!
     var frDBref: FIRDatabaseReference!
     
     //TODO : Change to table / collection
@@ -51,13 +51,9 @@ class PropertyListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("VC load : Add Property")
         
-        print("VC load : Property")
-        print("user =")
-        dump(user)
-        
-        print("saved User")
-        dump(User.currentUser)
+        user = User.currentUser
         
         frDBref = FIRDatabase.database().reference()
         

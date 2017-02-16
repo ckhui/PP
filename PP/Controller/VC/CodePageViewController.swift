@@ -14,7 +14,7 @@ import SwiftyJSON
 class CodePageViewController: UIViewController {
 
     //TEMP : testing user
-    var user = User.currentUser
+    var user : User!
     var codes = [Code]()
     var frDBref: FIRDatabaseReference!
     
@@ -24,13 +24,76 @@ class CodePageViewController: UIViewController {
             codeTableView.dataSource = self
         }
     }
+    
+    @IBOutlet weak var generateCode1: UIButton!
+    @IBOutlet weak var generateCode2: UIButton!
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("VC load : CodePage")
+        user = User.currentUser
         frDBref = FIRDatabase.database().reference()
+        initGenerateCodeButton()
         fetchAllCodeData()
 
     }
+    
+    func initGenerateCodeButton(){
+        generateCode1.isEnabled = false
+        generateCode2.isEnabled = false
+        switch (user.type) {
+        case .Admin :
+            setGenerateCodeButtonFunction(button: generateCode1, codeType: .AA)
+            setGenerateCodeButtonFunction(button: generateCode2, codeType: .AD)
+        case .AdminAgent :
+            setGenerateCodeButtonFunction(button: generateCode1, codeType: .SA)
+        case .AdminDeveloper :
+            setGenerateCodeButtonFunction(button: generateCode1, codeType: .SD)
+        default :
+            generateCode1.isEnabled = false
+            generateCode2.isEnabled = false
+        }
+    }
+    
+    
+    func generateCodeButtonPressed(_ sender : UIButton) {
+        guard let type = sender.accessibilityIdentifier
+            else {
+                print("CODE : Button have no type assign")
+                return
+        }
+        
+        switch type {
+        case "AD" :
+            generateNewCode(ofType: .AD)
+        case "AA" :
+            generateNewCode(ofType: .AA)
+        case "SD" :
+            generateNewCode(ofType: .SD)
+        case "SA" :
+            generateNewCode(ofType: .SA)
+        default:
+            print("CODE : Account Type Error")
+        }
+    }
+    
+    func generateNewCode(ofType type : PPACtion.AccountType){
+        let uid = UUID().uuidString
+        PPACtion().generatedCode(owner: user, codeId: uid, type: type)
+    }
+
+    
+    func setGenerateCodeButtonFunction(button : UIButton, codeType : PPACtion.AccountType) {
+        
+        button.isEnabled = true
+        
+        button.setTitle("Gen \(codeType.rawValue) Code", for: .normal)
+        button.accessibilityIdentifier = codeType.rawValue
+        button.addTarget(self, action: #selector(generateCodeButtonPressed(_:)), for: .touchUpInside)
+    }
+    
+    
     
     func fetchAllCodeData() {
         frDBref.child(user.type.rawValue).child(user.id).child("generatedCode").observe(.childAdded , with: { (snapshot) in

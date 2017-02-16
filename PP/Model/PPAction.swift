@@ -47,7 +47,7 @@ class PPACtion {
     }
     
     
-    func generatedCode(owner : User , codeId : String, type : AccountType , completion : (_ code : String) -> Void) {
+    func generatedCode(owner : User , codeId : String, type : AccountType) {
         
         let dict = ["owner" : owner.id,
                     "timeGenerated" : String(Date().timeIntervalSince1970),
@@ -60,9 +60,6 @@ class PPACtion {
         
         let path2 = "\(owner.type.rawValue)/\(owner.id)/generatedCode/"
         modifyDatabase(path: path2, key: codeId, value: "true")
-        
-        
-        completion(codeId)
     }
     
     
