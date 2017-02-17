@@ -37,11 +37,14 @@ class ProfileViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         print("VC load : Profile")
+        
+        //TODO : Move to viewdidappear??
+        //issue : uer is fix 
         user = User.currentUser
+        // TODO : do onec after setting user
         storageRef = FIRStorage.storage().reference()
         loadProfileImage()
         
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {

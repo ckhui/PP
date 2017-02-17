@@ -32,11 +32,14 @@ class CodePageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("VC load : CodePage")
-        user = User.currentUser
         frDBref = FIRDatabase.database().reference()
         initGenerateCodeButton()
         fetchAllCodeData()
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        user = User.currentUser
     }
     
     func initGenerateCodeButton(){

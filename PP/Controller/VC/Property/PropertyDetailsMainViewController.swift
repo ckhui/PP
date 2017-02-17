@@ -78,13 +78,16 @@ class PropertyDetailsMainViewController: UIViewController {
         updateView()
     }
     
+    
+    @IBOutlet weak var vcPlaceHolder: UIView!
+    
     private func add(asChildViewController viewController: UIViewController) {
         currentViewContoller = viewController
         // Add Child View Controller
         addChildViewController(viewController)
         
         // Add Child View as Subview
-        view.addSubview(viewController.view)
+        vcPlaceHolder.addSubview(viewController.view)
         
         // Configure Child View
         viewController.view.frame = view.bounds

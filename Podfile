@@ -12,6 +12,8 @@ pod "Firebase/Auth"
 pod "Firebase/Storage"
 pod 'FirebaseUI/Storage'
 pod 'SwiftyJSON'
+use_frameworks!
+pod 'DZNEmptyDataSet'
 
 
 end
