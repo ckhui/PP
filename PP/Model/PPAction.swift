@@ -116,8 +116,6 @@ class PPACtion {
     //TODO : seperate obeser user info changed event
     func observeUserInfoChanged(withType type : String, id : String){
         frDBref.child(type).child(id).observe(.childChanged, with: { (snapshot) in
-            //code
-            print(" User : Value changed -> \(snapshot)")
             if
                 snapshot.exists(),
                 let value = snapshot.value {
