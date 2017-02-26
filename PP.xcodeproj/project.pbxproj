@@ -82,6 +82,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5FCA39551E62A3EB0012C6DC /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				A1974F9F1E42AD8400F710FA /* CodePageViewController.swift */,
+				A1A6A5AC1E49474500F56FBF /* ProfileViewController.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
 		A172260A1E527F6300FCCAD0 /* other */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,11 +132,10 @@
 			children = (
 				A17226611E5538AE00FCCAD0 /* Auth */,
 				A17226621E5538F500FCCAD0 /* Property */,
-				A1974F9F1E42AD8400F710FA /* CodePageViewController.swift */,
+				5FCA39551E62A3EB0012C6DC /* Profile */,
 				A17226151E52871800FCCAD0 /* HistoryViewController.swift */,
 				A17226171E52872D00FCCAD0 /* NotificationViewController.swift */,
 				A17226131E5286F100FCCAD0 /* PartnerViewController.swift */,
-				A1A6A5AC1E49474500F56FBF /* ProfileViewController.swift */,
 				AF61AD0C1E24C1BE001FC3FB /* ViewController.swift */,
 				AF61AD201E24C581001FC3FB /* imagepickerViewController.swift */,
 			);
@@ -151,7 +159,6 @@
 				AF61AD1C1E24C20C001FC3FB /* LoginViewController.swift */,
 				AF61AD1E1E24C212001FC3FB /* SignUpViewController.swift */,
 			);
-			name = Auth;
 			path = Auth;
 			sourceTree = "<group>";
 		};
@@ -166,7 +173,6 @@
 				A172261F1E528F5D00FCCAD0 /* PropertyStatViewController.swift */,
 				A172261B1E528F2B00FCCAD0 /* PropertyTypeViewController.swift */,
 			);
-			name = Property;
 			path = Property;
 			sourceTree = "<group>";
 		};
@@ -252,6 +258,7 @@
 				TargetAttributes = {
 					AF61AD061E24C1BE001FC3FB = {
 						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = R5MWXFW4RY;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -489,7 +496,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = R5MWXFW4RY;
 				INFOPLIST_FILE = PP/SupportingFile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ckhui.PP;
@@ -504,7 +511,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = R5MWXFW4RY;
 				INFOPLIST_FILE = PP/SupportingFile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ckhui.PP;

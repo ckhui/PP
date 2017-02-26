@@ -32,6 +32,7 @@ class PartnerViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         count = count == 1 ? 0 : 1
+        dump (User.currentUser)
         partnerTableView.reloadData()
         
     }

@@ -11,6 +11,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseStorage
+import FirebaseAuth
 import SwiftyJSON
 
 class PPACtion {
@@ -28,6 +29,109 @@ class PPACtion {
     init(){
         frDBref = FIRDatabase.database().reference()
     }
+    
+    func initUser(){
+        
+        print("USER : load USER")
+        
+        guard let uid = FIRAuth.auth()?.currentUser?.uid
+            else {
+                print("USER : NO UID FOUND")
+                return
+        }
+        
+        print("USER : id \(uid)")
+        
+        frDBref.child("User").child(uid).child("type").observeSingleEvent(of: .value, with: { (snapshot) in
+            if
+                snapshot.exists(),
+                let accountType = snapshot.value as? String
+            {
+                self.loadUserInfo(withType: accountType, id: uid)
+                //self.observeUserInfoChanged(withType: accountType, id: uid)
+            }
+            else
+            {
+                print("USER : accountType Not found / Error")
+            }
+            
+            
+        })
+        
+        
+    }
+    
+    func loadUserInfo(withType type : String, id : String){
+        var isChild = true
+        var isAdmin = false
+        switch type {
+        case "PPAdmin" :
+            isAdmin = true
+        case "AdminAgent", "AdminDeveloper" :
+            isChild = false
+        case "StdDeveloper","StdAgent" :
+            isChild = true
+        default:
+            print ("USER : USER acctTYPE not found")
+            //arningPopUp(withTitle: "User", withMessage: "User not found")
+            return
+        }
+        
+       //TODO : change to singleEvent ??
+//        frDBref.child(type).child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+        frDBref.child(type).child(id).observe(.value, with: { (snapshot) in
+            if
+                snapshot.exists(),
+                let value = snapshot.value {
+                //TODO : creat user using data
+                let json = JSON(value)
+                
+                print("USER : Initializing User")
+                if isAdmin{
+                    print("USER : Initializing ADMIN USER")
+                    print("TODO : add admin user right and user initializer")
+                }
+                else {
+                    if !isChild {
+                        print("USER : Initializing PARENT USER")
+                        let user = ParentUser(id: id, accountType: type, json: json)
+                        User.setCurrentUser(user)
+                    } else {
+                        print("USER : Initializing CHILD USER")
+                        let user = ChildUser(id: id, accountType: type, json: json)
+                        User.setCurrentUser(user)
+                    }
+                }
+                
+                if self.firstLoad {
+                    self.loadUserCompletion?()
+                }
+                
+            }else{
+                print("USER : load user info Error")
+            }
+        })
+    }
+
+    //TODO : seperate obeser user info changed event
+//    func observeUserInfoChanged(withType type : String, id : String){
+//        frDBref.child(type).child(id).observe(.childChanged, with: { (snapshot) in
+//            //code
+//            print(" User : Value changed -> \(snapshot)")
+//            if
+//                snapshot.exists(),
+//                let value = snapshot.value {
+//                print("USER : User info Changed @\(snapshot.key)")
+//                User.valueChange(key: snapshot.key, value: value)
+//            }
+//            else{
+//                print("USER : change user info Error")
+//            }
+//        })
+//    }
+    
+    var loadUserCompletion: (()->Void)?
+    var firstLoad = true
     
     
     func modifyDatabase(path: String,key: String,value: String){

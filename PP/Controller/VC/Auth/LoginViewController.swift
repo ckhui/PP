@@ -35,7 +35,8 @@ class LoginViewController: UIViewController {
         }
         else{
             print("there ald some user, sorry")
-            notifyExistLoggedInUser()
+            // TODO : Add activity indicator, to indicate some user ald log in
+            fetchLoggedInUserData()
         }
     }
     
@@ -82,10 +83,21 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.post(AuthSuccessNotification)
     }
     
+    func fetchLoggedInUserData(){
+        let action = PPACtion()
+        action.initUser()
+        action.loadUserCompletion = {
+            action.firstLoad = false
+            self.notifyExistLoggedInUser()
+        }
+    }
+    
     func notifyExistLoggedInUser ()
     {
-        let ExistLoggedInUserNotification = Notification (name: Notification.Name(rawValue: "ExistLoggedInUserNotification"), object: nil, userInfo: nil)
-        NotificationCenter.default.post(ExistLoggedInUserNotification)
+        
+            let ExistLoggedInUserNotification = Notification (name: Notification.Name(rawValue: "ExistLoggedInUserNotification"), object: nil, userInfo: nil)
+            NotificationCenter.default.post(ExistLoggedInUserNotification)
+        
     }
     
     

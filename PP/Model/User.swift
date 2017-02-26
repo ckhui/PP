@@ -277,12 +277,16 @@ class User {
     }
      */
     
-    func setCurrentUser (_ parent : ParentUser){
+    static func setCurrentUser (_ parent : ParentUser){
         User.currentUser = User(parent)
     }
     
-    func setCurrentUser (_ child : ChildUser){
+    static func setCurrentUser (_ child : ChildUser){
         User.currentUser = User(child)
+    }
+    
+    static func valueChange(key : String, value : Any) {
+        
     }
     
     
