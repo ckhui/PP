@@ -167,8 +167,8 @@
 			children = (
 				A17226111E52867300FCCAD0 /* PropertiesViewController.swift */,
 				A1A6A5AE1E49478800F56FBF /* AddPropertyViewController.swift */,
-				A172261D1E528F4B00FCCAD0 /* PropertyBuildingViewController.swift */,
 				A17226211E528F8800FCCAD0 /* PropertyDetailsMainViewController.swift */,
+				A172261D1E528F4B00FCCAD0 /* PropertyBuildingViewController.swift */,
 				A17226191E5287B000FCCAD0 /* PropertyDetailsViewController.swift */,
 				A172261F1E528F5D00FCCAD0 /* PropertyStatViewController.swift */,
 				A172261B1E528F2B00FCCAD0 /* PropertyTypeViewController.swift */,

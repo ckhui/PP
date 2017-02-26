@@ -60,7 +60,7 @@ class PropertiesViewController: UIViewController {
         frDBref.child("Property").child(propertyID).observe(.value, with: { (snap) in
             print("Queue : get Property")
             let propertyJson = JSON(snap.value)
-            let newProperty = Property(name: propertyJson["name"].stringValue, id: propertyJson["id"].stringValue)
+            let newProperty = Property(name: propertyJson["name"].stringValue, id: snap.key)
             self.appendProperty(newProperty)
         })
     }
@@ -82,7 +82,13 @@ class PropertiesViewController: UIViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ToAddPropertyVC" {
+        if segue.identifier == "toPropertyDetailVC" {
+            if let detailsVC = segue.destination as? PropertyDetailsMainViewController,
+                let index = sender as? IndexPath {
+                Property.selectedProperty = properties[index.row]
+            }
+            
+        }else if segue.identifier == "ToAddPropertyVC" {
             return
         }
     }
@@ -102,6 +108,10 @@ extension PropertiesViewController : UITableViewDataSource, UITableViewDelegate 
         cell.textLabel?.text = properties[indexPath.row].name
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toPropertyDetailVC", sender: indexPath)
     }
     
 }

@@ -313,6 +313,15 @@ class User {
 class Property {
     var name : String
     var id : String
+
+    //TODO : add static var ? maybe?
+    //consider : if user want to see the property from other user profile
+    static var selectedProperty  = Property()
+    
+    init(){
+        name = "None"
+        id = "None"
+    }
     
     init(name : String, id : String){
         self.name = name

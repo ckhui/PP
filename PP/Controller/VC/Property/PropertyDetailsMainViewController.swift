@@ -13,6 +13,7 @@ class PropertyDetailsMainViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     var currentViewContoller = UIViewController()
+    @IBOutlet weak var vcPlaceHolder: UIView!
     
     private lazy var propertyTypeVC: PropertyTypeViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -20,21 +21,18 @@ class PropertyDetailsMainViewController: UIViewController {
         self.add(asChildViewController: viewController)
         return viewController
     }()
-    
     private lazy var propertyBuildingVC: PropertyBuildingViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         var viewController = storyboard.instantiateViewController(withIdentifier: "PropertyBuildingViewController") as! PropertyBuildingViewController
         self.add(asChildViewController: viewController)
         return viewController
     }()
-    
     private lazy var propertyStatVC: PropertyStatViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         var viewController = storyboard.instantiateViewController(withIdentifier: "PropertyStatViewController") as! PropertyStatViewController
         self.add(asChildViewController: viewController)
         return viewController
     }()
-    
     private lazy var propertyDetailsVC: PropertyDetailsViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         var viewController = storyboard.instantiateViewController(withIdentifier: "PropertyDetailsViewController") as! PropertyDetailsViewController
@@ -57,7 +55,6 @@ class PropertyDetailsMainViewController: UIViewController {
     
     private func setupView() {
         setupSegmentedControl()
-        
         updateView()
     }
     
@@ -77,9 +74,6 @@ class PropertyDetailsMainViewController: UIViewController {
     func selectionDidChange(_ sender: UISegmentedControl) {
         updateView()
     }
-    
-    
-    @IBOutlet weak var vcPlaceHolder: UIView!
     
     private func add(asChildViewController viewController: UIViewController) {
         currentViewContoller = viewController
@@ -120,14 +114,7 @@ class PropertyDetailsMainViewController: UIViewController {
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+    
+    
 }
