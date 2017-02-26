@@ -286,7 +286,14 @@ class User {
     }
     
     static func valueChange(key : String, value : Any) {
-        
+        switch key {
+        case "name":
+            if let name = value as? String {
+                User.currentUser.name = name
+            }
+        default:
+            print ("User : @\(key) value change not been handled")
+        }
     }
     
     

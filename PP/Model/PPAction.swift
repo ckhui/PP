@@ -48,7 +48,7 @@ class PPACtion {
                 let accountType = snapshot.value as? String
             {
                 self.loadUserInfo(withType: accountType, id: uid)
-                //self.observeUserInfoChanged(withType: accountType, id: uid)
+                self.observeUserInfoChanged(withType: accountType, id: uid)
             }
             else
             {
@@ -77,9 +77,9 @@ class PPACtion {
             return
         }
         
-       //TODO : change to singleEvent ??
-//        frDBref.child(type).child(id).observeSingleEvent(of: .value, with: { (snapshot) in
-        frDBref.child(type).child(id).observe(.value, with: { (snapshot) in
+
+        frDBref.child(type).child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+        //frDBref.child(type).child(id).observe(.value, with: { (snapshot) in
             if
                 snapshot.exists(),
                 let value = snapshot.value {
@@ -114,21 +114,21 @@ class PPACtion {
     }
 
     //TODO : seperate obeser user info changed event
-//    func observeUserInfoChanged(withType type : String, id : String){
-//        frDBref.child(type).child(id).observe(.childChanged, with: { (snapshot) in
-//            //code
-//            print(" User : Value changed -> \(snapshot)")
-//            if
-//                snapshot.exists(),
-//                let value = snapshot.value {
-//                print("USER : User info Changed @\(snapshot.key)")
-//                User.valueChange(key: snapshot.key, value: value)
-//            }
-//            else{
-//                print("USER : change user info Error")
-//            }
-//        })
-//    }
+    func observeUserInfoChanged(withType type : String, id : String){
+        frDBref.child(type).child(id).observe(.childChanged, with: { (snapshot) in
+            //code
+            print(" User : Value changed -> \(snapshot)")
+            if
+                snapshot.exists(),
+                let value = snapshot.value {
+                print("USER : User info Changed @\(snapshot.key)")
+                User.valueChange(key: snapshot.key, value: value)
+            }
+            else{
+                print("USER : change user info Error")
+            }
+        })
+    }
     
     var loadUserCompletion: (()->Void)?
     var firstLoad = true
