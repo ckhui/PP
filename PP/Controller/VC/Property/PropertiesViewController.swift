@@ -60,7 +60,7 @@ class PropertiesViewController: UIViewController {
         frDBref.child("Property").child(propertyID).observe(.value, with: { (snap) in
             print("Queue : get Property")
             let propertyJson = JSON(snap.value)
-            let newProperty = Property(name: propertyJson["name"].stringValue, id: snap.key)
+            let newProperty = Property(id: snap.key, json : propertyJson)
             self.appendProperty(newProperty)
         })
     }
@@ -105,7 +105,9 @@ extension PropertiesViewController : UITableViewDataSource, UITableViewDelegate 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PropertyCell")
             else { return UITableViewCell() }
         
-        cell.textLabel?.text = properties[indexPath.row].name
+        let currentProperty = properties[indexPath.row]
+        cell.textLabel?.text = currentProperty.name
+        cell.detailTextLabel?.text = "\(currentProperty.floor ?? 0) floor X \(currentProperty.column ?? 0) units"
         
         return cell
     }

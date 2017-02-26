@@ -11,11 +11,8 @@ import UIKit
 
 class AddPropertyViewController: UIViewController {
 
-    @IBOutlet weak var propertylist: UILabel! {
-        didSet{
-            propertylist.text = ""
-        }
-    }
+    @IBOutlet weak var floorTextField: UITextField!
+    @IBOutlet weak var columnTextField: UITextField!
     
     @IBOutlet weak var textField: UITextField! {
         didSet{
@@ -30,9 +27,20 @@ class AddPropertyViewController: UIViewController {
             warningPopUp(withTitle: "input error", withMessage: "cannot be empty")
             return
         }
-        PPACtion().addProperty(owner: User.currentUser, propertyName: text)
         
-        textField.text = ""
+        guard
+            let floorInput = floorTextField.text,
+            let columnInput = columnTextField.text,
+            let floor = Int(floorInput),
+            let column = Int(columnInput)
+        else {
+            warningPopUp(withTitle: "input Error", withMessage: "floor and unit must be int")
+            return
+        }
+
+        PPACtion().addProperty(owner: User.currentUser, propertyName: text, floor: floor, column: column)
+        
+        warningPopUp(withTitle: "Property Added", withMessage: "name : \(text) \nlayout: \(floor) Floor X \(column) units")
     }
 
     override func viewDidLoad() {

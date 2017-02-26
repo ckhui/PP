@@ -17,6 +17,17 @@ class PropertyDetailsViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var detailsLabel: UILabel! {
+        didSet{
+            if let floor = Property.selectedProperty.floor,
+                let column = Property.selectedProperty.column{
+                detailsLabel.text = "Floor : \(floor) \nColumn : \(column)"
+            }else{
+                detailsLabel.text = "ERRO reading property data"
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

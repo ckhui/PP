@@ -313,7 +313,8 @@ class User {
 class Property {
     var name : String
     var id : String
-
+    var floor : Int?
+    var column : Int?
     //TODO : add static var ? maybe?
     //consider : if user want to see the property from other user profile
     static var selectedProperty  = Property()
@@ -326,5 +327,12 @@ class Property {
     init(name : String, id : String){
         self.name = name
         self.id = id
+    }
+    
+    init(id : String, json : JSON) {
+        self.id = id
+        name = json["name"].stringValue
+        floor = json["floor"].intValue
+        column = json["column"].intValue
     }
 }

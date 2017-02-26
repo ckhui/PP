@@ -169,9 +169,10 @@ class PPACtion {
         return [:]
     }
     
-    func addProperty(owner : User , propertyName : String) {
-        let dict = ["owner" : owner.id, "timeGenerated" : String(Date().timeIntervalSince1970), "name" : propertyName]
-        
+    func addProperty(owner : User , propertyName : String, floor : Int, column : Int) {
+        var dict = ["owner" : owner.id, "timeGenerated" : String(Date().timeIntervalSince1970), "name" : propertyName]
+        dict["floor"] = String(floor)
+        dict["column"] = String(column)
         let path1 = "Property/"
         let autoID = modifyDatabaseByAutoID(path: path1, dictionary: dict)
         
