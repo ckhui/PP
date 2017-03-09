@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		268A67070E93093BE4F55DF4 /* Pods_PP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8289FA99FF1D92FDDA9C5B /* Pods_PP.framework */; };
+		5F9576331E7177D200445A63 /* BuildingGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9576321E7177D200445A63 /* BuildingGridLayout.swift */; };
 		A149FB041E38221000B31B1D /* PPAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149FB031E38221000B31B1D /* PPAction.swift */; };
 		A17226121E52867300FCCAD0 /* PropertiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17226111E52867300FCCAD0 /* PropertiesViewController.swift */; };
 		A17226141E5286F100FCCAD0 /* PartnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17226131E5286F100FCCAD0 /* PartnerViewController.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		4F8289FA99FF1D92FDDA9C5B /* Pods_PP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F9576321E7177D200445A63 /* BuildingGridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildingGridLayout.swift; sourceTree = "<group>"; };
 		69C472857A80D5ECA69FFF98 /* Pods-PP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PP.release.xcconfig"; path = "Pods/Target Support Files/Pods-PP/Pods-PP.release.xcconfig"; sourceTree = "<group>"; };
 		A149FB031E38221000B31B1D /* PPAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PPAction.swift; sourceTree = "<group>"; };
 		A17226111E52867300FCCAD0 /* PropertiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertiesViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F9576311E71779800445A63 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				5F9576321E7177D200445A63 /* BuildingGridLayout.swift */,
+			);
+			name = Layout;
+			path = ../SupportingFile;
+			sourceTree = "<group>";
+		};
 		5FCA39551E62A3EB0012C6DC /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +124,7 @@
 		A172260D1E527F8500FCCAD0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5F9576311E71779800445A63 /* Layout */,
 				A1974F9D1E42AD1D00F710FA /* CodeTableViewCell.swift */,
 			);
 			path = View;
@@ -370,6 +382,7 @@
 				A172261E1E528F4B00FCCAD0 /* PropertyBuildingViewController.swift in Sources */,
 				A1974FA01E42AD8400F710FA /* CodePageViewController.swift in Sources */,
 				A149FB041E38221000B31B1D /* PPAction.swift in Sources */,
+				5F9576331E7177D200445A63 /* BuildingGridLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

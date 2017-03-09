@@ -261,6 +261,14 @@ extension UIImage {
 
 
 
+extension UIColor {
+    static let savedColor = [UIColor.red, UIColor.green, UIColor.orange]
+    static func randomColor() -> UIColor {
+        let num = Int(arc4random_uniform(3))
+        return savedColor[num]
+    }
+}
+
 //TODO : USer protocol to creat general variable (user)
 
 //protocol MainTabViewControllerProtocol : class {

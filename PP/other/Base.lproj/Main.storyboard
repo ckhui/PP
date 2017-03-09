@@ -292,23 +292,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8km-wm-wT9">
-                                <rect key="frame" x="16" y="130" width="343" height="451"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8km-wm-wT9">
+                                <rect key="frame" x="16" y="108" width="343" height="510"/>
                             </containerView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OU3-Yd-RIA">
+                                <rect key="frame" x="26" y="72" width="323" height="29"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8km-wm-wT9" firstAttribute="top" secondItem="OU3-Yd-RIA" secondAttribute="bottom" constant="8" id="18B-Pn-P8V"/>
+                            <constraint firstItem="OU3-Yd-RIA" firstAttribute="top" secondItem="Ikv-ai-Tkl" secondAttribute="bottom" constant="8" id="Jy2-Lz-lVK"/>
+                            <constraint firstItem="OU3-Yd-RIA" firstAttribute="leading" secondItem="HSQ-Y3-LqF" secondAttribute="leadingMargin" constant="10" id="ZEr-gP-8zf"/>
+                            <constraint firstItem="8km-wm-wT9" firstAttribute="leading" secondItem="HSQ-Y3-LqF" secondAttribute="leadingMargin" id="hGo-Hh-lfc"/>
+                            <constraint firstItem="o7x-DU-71J" firstAttribute="top" secondItem="8km-wm-wT9" secondAttribute="bottom" id="lZA-wR-Jx1"/>
+                            <constraint firstItem="8km-wm-wT9" firstAttribute="trailing" secondItem="HSQ-Y3-LqF" secondAttribute="trailingMargin" id="pwG-vD-a1z"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OU3-Yd-RIA" secondAttribute="trailing" constant="10" id="vjy-ti-XjW"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qkV-iG-nrg">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="OU3-Yd-RIA">
-                            <rect key="frame" x="127" y="7.5" width="121" height="29"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="First"/>
-                                <segment title="Second"/>
-                            </segments>
-                        </segmentedControl>
                     </navigationItem>
                     <connections>
                         <outlet property="segmentedControl" destination="OU3-Yd-RIA" id="V1L-03-BNG"/>
@@ -331,14 +338,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Building View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNc-gp-y6M">
-                                <rect key="frame" x="26" y="30" width="323" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Building View" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNc-gp-y6M">
+                                <rect key="frame" x="26" y="28" width="323" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eb3-sx-LLX">
-                                <rect key="frame" x="16" y="61" width="343" height="606"/>
+                                <rect key="frame" x="16" y="57" width="343" height="610"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="O9X-S4-FEK">
                                     <size key="itemSize" width="50" height="50"/>
@@ -347,7 +354,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="7V4-Ef-SdP">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="7V4-Ef-SdP">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -361,14 +368,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="eb3-sx-LLX" secondAttribute="trailing" id="7CV-hp-c36"/>
-                            <constraint firstItem="eNc-gp-y6M" firstAttribute="top" secondItem="P23-OZ-NxJ" secondAttribute="bottom" constant="10" id="FD7-gh-XFy"/>
+                            <constraint firstItem="eNc-gp-y6M" firstAttribute="top" secondItem="P23-OZ-NxJ" secondAttribute="bottom" constant="8" id="FD7-gh-XFy"/>
                             <constraint firstItem="eNc-gp-y6M" firstAttribute="leading" secondItem="ImR-QO-p54" secondAttribute="leadingMargin" constant="10" id="GPu-9i-wSW"/>
                             <constraint firstItem="3dn-Zs-ys3" firstAttribute="top" secondItem="eb3-sx-LLX" secondAttribute="bottom" id="Np2-sF-8h9"/>
                             <constraint firstItem="eb3-sx-LLX" firstAttribute="leading" secondItem="ImR-QO-p54" secondAttribute="leadingMargin" id="TxO-3V-haB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="eNc-gp-y6M" secondAttribute="trailing" constant="10" id="c1Y-Z3-6Qc"/>
-                            <constraint firstItem="eb3-sx-LLX" firstAttribute="top" secondItem="eNc-gp-y6M" secondAttribute="bottom" constant="10" id="lJj-RW-WwK"/>
+                            <constraint firstItem="eb3-sx-LLX" firstAttribute="top" secondItem="eNc-gp-y6M" secondAttribute="bottom" constant="8" id="lJj-RW-WwK"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="buildingCollectionView" destination="eb3-sx-LLX" id="yJv-tc-Xn9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mnv-Ag-2fg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -879,7 +889,7 @@
                                         <rect key="frame" x="0.0" y="49" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="67W-AC-bnh" id="mLW-8x-lQe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Ild-Uo-HY2">
@@ -996,7 +1006,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bFd-p4-3fN" id="08h-k4-Pct">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
