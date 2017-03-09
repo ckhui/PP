@@ -28,11 +28,11 @@ class PartnerViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    var count = 1
+    var count = 0
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        count = count == 1 ? 0 : 1
-        dump (User.currentUser)
+        //count = count == 1 ? 0 : 1
+        //dump (User.currentUser)
         partnerTableView.reloadData()
         
     }
@@ -59,12 +59,12 @@ extension PartnerViewController : UITableViewDataSource, UITableViewDelegate{
 extension PartnerViewController : DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         
-        return UIImage(named: "fan")?.resizeImage(newWidth: partnerTableView.frame.width / 2)
+        return UIImage(named: "partner")?.resizeImage(newWidth: partnerTableView.frame.width / 2)
     }
     
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         
-        let text = "TITLE : Please Allow Photo Access"
+        let text = "No Partner Found"
         
         let attributes = [NSForegroundColorAttributeName : UIColor.darkGray]
         
@@ -75,7 +75,7 @@ extension PartnerViewController : DZNEmptyDataSetSource, DZNEmptyDataSetDelegate
     
     
     func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "Description : testing word here"
+        let text = "Click to add partner"
         
         let attributes = [NSForegroundColorAttributeName : UIColor.yellow]
         
@@ -88,10 +88,11 @@ extension PartnerViewController : DZNEmptyDataSetSource, DZNEmptyDataSetDelegate
         
         let myAttribute = [ NSFontAttributeName: UIFont(name: "Chalkduster", size: 18.0)! ]
         
-         let string = NSAttributedString(string: "Button Title", attributes: myAttribute)
+         let string = NSAttributedString(string: "Add Partner", attributes: myAttribute)
         
         return string
     }
+    
     
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
         return UIColor.lightGray

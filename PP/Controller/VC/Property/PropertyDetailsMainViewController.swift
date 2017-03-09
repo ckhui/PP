@@ -84,7 +84,7 @@ class PropertyDetailsMainViewController: UIViewController {
         vcPlaceHolder.addSubview(viewController.view)
         
         // Configure Child View
-        viewController.view.frame = view.bounds
+        viewController.view.frame = vcPlaceHolder.bounds
         viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         // Notify Child View Controller

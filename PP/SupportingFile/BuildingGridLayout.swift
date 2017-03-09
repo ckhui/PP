@@ -10,13 +10,45 @@ import UIKit
 
 class BuildingGridLayout: UICollectionViewLayout {
     
-    var blockSize : CGSize = CGSize(width: 50, height: 10)
+    var blockSize : CGSize = CGSize(width: 80, height: 50)
     
     var itemsSize = [CGSize]()
     var contentSize = CGSize()
     
+    var oriSize = CGSize() {
+        didSet{
+            contentSize = oriSize
+        }
+    }
+    
+    var verticalLock = false {
+        didSet{
+            adjustSizeForDirectionLock()
+        }
+    }
+    
+    var horizontalLock = false {
+        didSet{
+            adjustSizeForDirectionLock()
+        }
+    }
+    
     var layoutAttributes = Dictionary<String, UICollectionViewLayoutAttributes>()
     
+    
+    private func adjustSizeForDirectionLock() {
+        var height = oriSize.height
+        var width = oriSize.width
+        
+        if verticalLock {
+            height = self.collectionView!.frame.height
+        }
+        if horizontalLock {
+            width = self.collectionView!.frame.width
+        }
+        contentSize = CGSize(width: width, height: height)
+        print("size : \(contentSize)")
+    }
     
     override func prepare() {
         if self.collectionView?.numberOfSections == 0 {
@@ -148,7 +180,8 @@ class BuildingGridLayout: UICollectionViewLayout {
         //        self.contentSize = CGSize(width: contentWidth, height: contentHeight)
         let lastAttributes = layoutAttributesForItem(at: indexPath)!
         contentHeight = lastAttributes.frame.origin.y + lastAttributes.frame.size.height
-        self.contentSize = CGSize(width: contentWidth, height: contentHeight)
+        //self.contentSize = CGSize(width: contentWidth, height: contentHeight)
+        self.oriSize = CGSize(width: contentWidth, height: contentHeight)
         
         
         //        yOffset += itemSize.height // 10

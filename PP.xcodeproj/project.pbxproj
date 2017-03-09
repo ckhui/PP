@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		268A67070E93093BE4F55DF4 /* Pods_PP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8289FA99FF1D92FDDA9C5B /* Pods_PP.framework */; };
 		5F9576331E7177D200445A63 /* BuildingGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9576321E7177D200445A63 /* BuildingGridLayout.swift */; };
+		5F9576361E71A16100445A63 /* BuildingBlockCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9576341E71A16100445A63 /* BuildingBlockCollectionViewCell.swift */; };
+		5F9576371E71A16100445A63 /* BuildingBlockCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F9576351E71A16100445A63 /* BuildingBlockCollectionViewCell.xib */; };
 		A149FB041E38221000B31B1D /* PPAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149FB031E38221000B31B1D /* PPAction.swift */; };
 		A17226121E52867300FCCAD0 /* PropertiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17226111E52867300FCCAD0 /* PropertiesViewController.swift */; };
 		A17226141E5286F100FCCAD0 /* PartnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17226131E5286F100FCCAD0 /* PartnerViewController.swift */; };
@@ -40,6 +42,8 @@
 /* Begin PBXFileReference section */
 		4F8289FA99FF1D92FDDA9C5B /* Pods_PP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F9576321E7177D200445A63 /* BuildingGridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildingGridLayout.swift; sourceTree = "<group>"; };
+		5F9576341E71A16100445A63 /* BuildingBlockCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildingBlockCollectionViewCell.swift; sourceTree = "<group>"; };
+		5F9576351E71A16100445A63 /* BuildingBlockCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingBlockCollectionViewCell.xib; sourceTree = "<group>"; };
 		69C472857A80D5ECA69FFF98 /* Pods-PP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PP.release.xcconfig"; path = "Pods/Target Support Files/Pods-PP/Pods-PP.release.xcconfig"; sourceTree = "<group>"; };
 		A149FB031E38221000B31B1D /* PPAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PPAction.swift; sourceTree = "<group>"; };
 		A17226111E52867300FCCAD0 /* PropertiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertiesViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 			children = (
 				5F9576311E71779800445A63 /* Layout */,
 				A1974F9D1E42AD1D00F710FA /* CodeTableViewCell.swift */,
+				5F9576341E71A16100445A63 /* BuildingBlockCollectionViewCell.swift */,
+				5F9576351E71A16100445A63 /* BuildingBlockCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -301,6 +307,7 @@
 				AF61AD151E24C1BE001FC3FB /* LaunchScreen.storyboard in Resources */,
 				AF61AD121E24C1BE001FC3FB /* Assets.xcassets in Resources */,
 				AF61AD101E24C1BE001FC3FB /* Main.storyboard in Resources */,
+				5F9576371E71A16100445A63 /* BuildingBlockCollectionViewCell.xib in Resources */,
 				AF61AD231E24C66E001FC3FB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,6 +383,7 @@
 				A1A6A5AD1E49474500F56FBF /* ProfileViewController.swift in Sources */,
 				A172261C1E528F2B00FCCAD0 /* PropertyTypeViewController.swift in Sources */,
 				A17226181E52872D00FCCAD0 /* NotificationViewController.swift in Sources */,
+				5F9576361E71A16100445A63 /* BuildingBlockCollectionViewCell.swift in Sources */,
 				AF61AD0B1E24C1BE001FC3FB /* AppDelegate.swift in Sources */,
 				A17226201E528F5D00FCCAD0 /* PropertyStatViewController.swift in Sources */,
 				A19EF54F1E319FAF0091556E /* User.swift in Sources */,
